@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from "react";
+import Info from "./Info";
 function App() {
+  let number;
+  const [status, setStatus] = useState(0);
+  let fact = "A very interesting fact";
+  function getInformation() {
+    setStatus(1);
+    setTimeout(() => {
+      setStatus(2);
+    }, 1000);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          getInformation();
+        }}
+      >
+        <label>Enter a number</label>
+        <input onChange={(e) => (number = e.target.value)} />
+        <button>Find Fact</button>
+        <Info status={status} fact={fact} />
+      </form>
     </div>
   );
 }
